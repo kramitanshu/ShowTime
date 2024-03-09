@@ -1,8 +1,8 @@
 import fs from "fs";
-import path, { resolve } from "path";
+import path from "path";
 import { fileURLToPath } from "url";
 import { ApiError } from "../utils/ApiError.js";
-import { rejects } from "assert";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -45,8 +45,6 @@ class Movie {
     this.rating = rating;
     this.thumbnail = thumbnail;
   }
-
-  // function to save, function to findByName
 
   save() {
     return new Promise((resolve, reject) => {

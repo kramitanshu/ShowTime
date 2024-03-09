@@ -7,12 +7,12 @@ import { addMovie, allMovies, deleteMovie, searchWithName, updateMovieDetails } 
 const router = Router();
 
 
-router.route("/all-movies").get(allMovies);
-router.route("/add").post(addMovie);
 router.route("/").get(searchWithName);
+router.route("/add").post(addMovie);
 router.route("/update").patch(updateMovieDetails);
-router.route("/:filter").get();
 router.route("/delete/:name").delete(deleteMovie);
+router.route("/all-movies").get(allMovies);
+router.route("/:filter").get();
 
 
 

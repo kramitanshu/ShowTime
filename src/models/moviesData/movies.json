@@ -1,1 +1,18 @@
-[{"name":"Shutter Island","director":"Christopher Nolan","yor":"2010","language":"English","rating":"8.3","thumbnail":"Environment Setup"}]
+[
+  {
+    "name": "Shutter Island",
+    "director": "Christopher Nolan",
+    "yor": "2010",
+    "language": "English",
+    "rating": "8.3",
+    "thumbnail": "Environment Setup"
+  },
+  {
+    "name": "Mission Impossible 7",
+    "director": "Christopher McQuarrie",
+    "yor": "2023",
+    "language": "English",
+    "rating": "7.7",
+    "thumbnail": "thumbnailPath"
+  }
+]
