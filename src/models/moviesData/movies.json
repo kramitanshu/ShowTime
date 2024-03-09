@@ -1,6 +1,6 @@
 [
   {
-    "name": "Misson Impossible 7",
+    "name": "Mission Impossible 7",
     "director": "Unknown",
     "yor": "2022",
     "language": "English",
@@ -8,9 +8,17 @@
     "thumbnail": "thumbnailPath"
   },
   {
-    "name": "Misson Impossible 7",
+    "name": "Mission Impossible 7",
     "director": "finally",
     "yor": "202",
+    "language": "English",
+    "rating": "8.8",
+    "thumbnail": "Environment Setup"
+  },
+  {
+    "name": "Shutter Island",
+    "director": "Christopher Nolan",
+    "yor": "2008",
     "language": "English",
     "rating": "8.8",
     "thumbnail": "Environment Setup"
