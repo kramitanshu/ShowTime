@@ -15,7 +15,7 @@ const addMovie = asyncHandler(async (req, res) => {
   ) {
     throw new ApiError(400, "All fields are required");
   }
-
+  // let prevMovies = Movie.fetchAll()
   // what if movie is already listed ? -- compare
 
   // assuming it's not there
@@ -35,7 +35,7 @@ const allMovies = asyncHandler(async (req, res) => {
   let movies;
   try {
     movies = await Movie.fetchAll();
-    return res.status(201).json(new ApiResponse(200, movies, movies));
+    return res.status(201).json(new ApiResponse(200, movies, "All movies"));
   } catch (error) {
     console.error(error);
     throw new ApiError(500, "Issue with saving data in filesystem");
@@ -66,7 +66,7 @@ const updateMovieDetails = asyncHandler(async (req, res) => {
     console.error(error);
     throw new ApiError(500, "Issue with saving data in filesystem");
   }
-  const filteredMovie = movies.map((movie) =>{
+  const updatedMovies = movies.map((movie) =>{
     if(movie.name === name){
       movie.director = director;
       movie.yor = yor,
@@ -75,15 +75,19 @@ const updateMovieDetails = asyncHandler(async (req, res) => {
     }
     return movie;
   });
-
-  // now update filesystem data
-  res
-    .status(201)
-    .json(new ApiResponse(200, filteredMovie, "Movie with given name"));
+  try{
+    const result = Movie.update(updatedMovies);
+    if(result){
+      res.status(200).json(new ApiResponse(201, updatedMovies, "Movie details has been updated"))
+    }
+  }catch(error){
+    console.log(error)
+    throw new ApiError(500, "Issue with updating Data")
+  }
 });
 
 const deleteMovie = asyncHandler(async (req, res) => {
-  const { name } = req.query;
+  const { name } = req.params.name;
   let movies;
   try {
     movies = await Movie.fetchAll();
@@ -91,10 +95,20 @@ const deleteMovie = asyncHandler(async (req, res) => {
     console.error(error);
     throw new ApiError(500, "Issue with saving data in filesystem");
   }
-  const filteredMovie = movies.filter((movie) => movie.name === name);
-  res
-    .status(201)
-    .json(new ApiResponse(200, filteredMovie, "Movie with given name"));
+
+  const modifiedMovies = movies.filter((movie) => movie.name !== name);
+  console.log(name)
+
+  // modify stored array
+  try{
+    const result = Movie.update(modifiedMovies);
+    if(result){
+      res.status(200).json(new ApiResponse(201, modifiedMovies, "Movie details has been updated"))
+    }
+  }catch(error){
+    console.log(error)
+    throw new ApiError(500, "Issue with updating Data")
+  }
 });
 
 export { addMovie, allMovies, searchWithName, updateMovieDetails, deleteMovie };

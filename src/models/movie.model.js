@@ -1,5 +1,5 @@
 import fs from "fs";
-import path from "path";
+import path, { resolve } from "path";
 import { fileURLToPath } from "url";
 import { ApiError } from "../utils/ApiError.js";
 import { rejects } from "assert";
@@ -36,6 +36,7 @@ const getMoviesFromFile = (cb) => {
 };
 
 class Movie {
+
   constructor(name, director, yor, language, rating, thumbnail) {
     this.name = name;
     this.director = director;
@@ -74,6 +75,19 @@ class Movie {
           resolve(movies);
         });
       });
+  }
+
+  static update(newMovies){
+    return new Promise((resolve, reject) =>{
+      fs.writeFile(p, JSON.stringify(newMovies), (err) => {
+        if (err) {
+          console.error(err);
+          reject(new ApiError(500, "Movie file not found"));
+        } else {
+          resolve();
+        }
+      });
+    })
   }
 }
 

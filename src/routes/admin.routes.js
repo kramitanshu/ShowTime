@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addMovie, allMovies, searchWithName, updateMovieDetails } from "../controllers/admin.controller.js";
+import { addMovie, allMovies, deleteMovie, searchWithName, updateMovieDetails } from "../controllers/admin.controller.js";
 
 
 
@@ -12,7 +12,7 @@ router.route("/add").post(addMovie);
 router.route("/").get(searchWithName);
 router.route("/update").patch(updateMovieDetails);
 router.route("/:filter").get();
-router.route("/delete/:name").delete();
+router.route("/delete/:name").delete(deleteMovie);
 
 
 
