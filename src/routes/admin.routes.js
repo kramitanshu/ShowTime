@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addMovie } from "../controllers/admin.controller.js";
+import { addMovie, allMovies } from "../controllers/admin.controller.js";
 
 
 
@@ -7,7 +7,7 @@ import { addMovie } from "../controllers/admin.controller.js";
 const router = Router();
 
 
-router.route("/all-movies").get();
+router.route("/all-movies").get(allMovies);
 router.route("/add").post(addMovie);
 router.route("/:filter").get();
 router.route("/:name").get();
