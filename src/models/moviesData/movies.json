@@ -1,18 +1,1 @@
-[
-  {
-    "name": "Shutter Island",
-    "director": "Christopher Nolan",
-    "yor": "2010",
-    "language": "English",
-    "rating": "8.3",
-    "thumbnail": "Environment Setup"
-  },
-  {
-    "name": "Mission Impossible 7",
-    "director": "Christopher McQuarrie",
-    "yor": "2023",
-    "language": "English",
-    "rating": "7.7",
-    "thumbnail": "thumbnailPath"
-  }
-]
+[{"name":"Shutter Island","director":"Christopher Nolan","yor":"2010","language":"English","rating":"8.3","thumbnail":"Environment Setup"},{"name":"Mission Impossible 7","director":"Christopher McQuarrie","yor":"2023","language":"English","rating":"7.7","thumbnail":"thumbnailPath"},{"name":"Oppenheimer","director":"Christopher Nolan","yor":"2023","language":"English","rating":"8.4","thumbnail":"thumbnailPath"},{"name":"The Marvels","director":"Nia DaCosta","yor":"2023","language":"English","rating":"5.6","thumbnail":"thumbnailPath"},{"name":"Killers of the Flower Moon","director":"Martin Scorsese","yor":"2023","language":"English","rating":"7.7","thumbnail":"thumbnailPath"}]

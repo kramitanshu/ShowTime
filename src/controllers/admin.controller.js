@@ -66,23 +66,25 @@ const updateMovieDetails = asyncHandler(async (req, res) => {
     console.error(error);
     throw new ApiError(500, "Issue with saving data in filesystem");
   }
-  const updatedMovies = movies.map((movie) =>{
-    if(movie.name === name){
+  const updatedMovies = movies.map((movie) => {
+    if (movie.name === name) {
       movie.director = director;
-      movie.yor = yor,
-      movie.language = language,
-      movie.rating = rating
+      (movie.yor = yor), (movie.language = language), (movie.rating = rating);
     }
     return movie;
   });
-  try{
+  try {
     const result = Movie.update(updatedMovies);
-    if(result){
-      res.status(200).json(new ApiResponse(201, updatedMovies, "Movie details has been updated"))
+    if (result) {
+      res
+        .status(200)
+        .json(
+          new ApiResponse(201, updatedMovies, "Movie details has been updated")
+        );
     }
-  }catch(error){
-    console.log(error)
-    throw new ApiError(500, "Issue with updating Data")
+  } catch (error) {
+    console.log(error);
+    throw new ApiError(500, "Issue with updating Data");
   }
 });
 
@@ -97,18 +99,57 @@ const deleteMovie = asyncHandler(async (req, res) => {
   }
 
   const modifiedMovies = movies.filter((movie) => movie.name !== name);
-  console.log(name)
+  console.log(name);
 
   // modify stored array
-  try{
+  try {
     const result = Movie.update(modifiedMovies);
-    if(result){
-      res.status(200).json(new ApiResponse(201, modifiedMovies, "Movie details has been updated"))
+    if (result) {
+      res
+        .status(200)
+        .json(
+          new ApiResponse(201, modifiedMovies, "Movie details has been updated")
+        );
     }
-  }catch(error){
-    console.log(error)
-    throw new ApiError(500, "Issue with updating Data")
+  } catch (error) {
+    console.log(error);
+    throw new ApiError(500, "Issue with updating Data");
   }
 });
 
-export { addMovie, allMovies, searchWithName, updateMovieDetails, deleteMovie };
+const filterRequest = asyncHandler(async (req, res) => {
+  const filterQuery = (params) => {
+    return Object.entries(params)
+      .filter(([key, value]) => value !== undefined)
+      .map(([key, value]) => ({ parameter: key, value: value }));
+  };
+
+  const definedParams = filterQuery(req.query);
+  let movies;
+  try {
+    movies = await Movie.fetchAll();
+  } catch (error) {
+    console.error(error);
+    throw new ApiError(500, "Issue with saving data in filesystem");
+  }
+
+  const filteredMovies = [];
+  for(let i = 0; i<movies.length; i++){
+    let flag = true;
+    for(let j = 0; j<definedParams.length; j++){
+      if(movies[i][definedParams[j].parameter] !== definedParams[j].value) flag = false;
+    }
+    if(flag) filteredMovies.push(movies[i]);
+  }
+
+  if(filteredMovies) res.status(200).json(new ApiResponse(201, filteredMovies, "Filtered Movies"))
+});
+
+export {
+  addMovie,
+  allMovies,
+  searchWithName,
+  updateMovieDetails,
+  deleteMovie,
+  filterRequest,
+};
